@@ -7,6 +7,12 @@ import Posts from './posts'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function blog({ post }) {
+    let date = new Date()
+    console.log('date', date)
+    let dt = date.getDate() + '-' + date.getDay() + '-' + date.getFullYear()
+
+
+
     return (
         <>
             <Head>
@@ -24,10 +30,27 @@ export default function blog({ post }) {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className="p-2">
-                <div className="text-center">
-                    <h1 className="text-3xl font-bold underline">{post.title}</h1>
-                    <p>{post.description}</p>
+            <main className="container mx-auto my-10">
+                <div className=" text-justify border border-gray-300 rounded-lg p-4 m-2 md:w-2/3 md:mx-auto  ">
+                    <div className='flex justify-between items-center'>
+                        <h1 className="text-3xl font-bold my-3">{post.title}</h1>
+                        <p>Posted : {dt}</p>
+                    </div>
+                    <p className='text-xl'>{post.description}</p>
+                    <div className='my-3 flex items-center justify-between'>
+                        <p className='text-sm'>by MED NAJJAR</p>
+                        <div>
+                            <button className='border rounded-full w-14 h-14 p-1 mx-6'>like</button>
+                            <button className='border rounded-full w-14 h-14 p-1'>heart</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label>
+                                <textarea maxLength={1000} autoFocus className='border p-2 rounded-md resize-none' placeholder='Comment...' id="w3review" name="w3review" rows="4" cols="50"></textarea>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </main>
         </>
