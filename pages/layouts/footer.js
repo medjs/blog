@@ -23,39 +23,30 @@ const footer = () => {
     return emailRegex.test(email)
   }
   return (
-    <div className='w-full p-6 bg-black text-white buttom-0 pb-9'>
+    <div className='w-full p-6 buttom-0'>
       <div className=' container px-4 mx-auto sm:flex-wrap-reverse md:flex justify-around'>
         <div className='w-full md:w-1/2'>
           <h3 className='text-xl font-semibold'>Links</h3>
           <div className=' flex-col h-60 leading-9 mt-5'>
             <div className='hover:underline'>
               <Link href='/termsAndConditions'>
-                <b>Terms and conditions</b>
+                <p>Terms and conditions</p>
               </Link>
             </div>
             <div className='hover:underline'>
               <Link href='/returnAndRefund'>
-                <b>Return and refund policy</b>
+                <p>Return and refund policy</p>
               </Link>
             </div>
             <div className='hover:underline'>
               <Link href='/privacyPolicy'>
-                <b>Privicy policy</b>
+                <p>Privicy policy</p>
               </Link>
             </div>
             <div className='hover:underline'>
               <Link href='/shippingInfo'>
-                <b>Shipping info</b>
+                <p>Shipping info</p>
               </Link>
-            </div>
-            <div className='font-semibold'>
-              <h2 className='my-2'>Checkout With Debit/Credit Card:</h2>
-              <Image
-                src={paypalCards}
-                width={300}
-                height={'auto'}
-                alt='paypal cards'
-              />
             </div>
           </div>
         </div>
@@ -69,7 +60,7 @@ const footer = () => {
                   Get the latest news about discounts, new arrival product's.
                 </p>
                 <input
-                  className='w-full rounded-sm text-black pl-1'
+                  className='w-full rounded-sm border border-gray-400 text-black pl-1'
                   type='email'
                   name='email'
                   placeholder='Enter your email address'
@@ -81,7 +72,7 @@ const footer = () => {
               <div className='mt-4'>
                 <button
                   type='submit'
-                  className='bg-orange-500 w-full rounded-sm text-xl p-2 hover:bg-blue-400'
+                  className=' w-full rounded-sm border border-gray-400  text-xl p-2 hover:bg-blue-400'
                 >
                   Submit
                 </button>
@@ -93,7 +84,7 @@ const footer = () => {
           </div>
         </div>
       </div>
-      <div className='p-3 mb-7 mt-5 pb-8 text-center text-sm'>
+      <div className='p-3 mt-5 text-center text-sm'>
         <p>All rights reserved &copy; 2023 AirCoolPalace</p>
       </div>
     </div>

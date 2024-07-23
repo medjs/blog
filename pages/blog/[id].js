@@ -1,16 +1,24 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../../styles/Home.module.css'
 import Posts from './posts'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useState } from 'react';
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function blog({ post }) {
     let date = new Date()
-    console.log('date', date)
     let dt = date.getDate() + '-' + date.getDay() + '-' + date.getFullYear()
+    const [like, setLike] = useState(false)
+    const [love, setLove] = useState(false)
 
+    const liked = () => {
+        (!like && !love) ? setLike(true) : alert('already liked this post!')
+    }
+
+    const loved = () => {
+        (!like && !love) ? setLove(true) : alert('already liked this post!')
+    }
 
 
     return (
@@ -32,16 +40,22 @@ export default function blog({ post }) {
             </Head>
             <main className="container mx-auto my-10">
                 <div className=" text-justify border border-gray-300 rounded-lg p-4 m-2 md:w-2/3 md:mx-auto  ">
-                    <div className='flex justify-between items-center'>
+                    <div className='flex justify-between items-center  my-3'>
                         <h1 className="text-3xl font-bold my-3">{post.title}</h1>
                         <p>Posted : {dt}</p>
                     </div>
                     <p className='text-xl'>{post.description}</p>
                     <div className='my-3 flex items-center justify-between'>
                         <p className='text-sm'>by MED NAJJAR</p>
-                        <div>
-                            <button className='border rounded-full w-14 h-14 p-1 mx-6'>like</button>
-                            <button className='border rounded-full w-14 h-14 p-1'>heart</button>
+                        <div className='flex justify-around items-center w-1/6'>
+                        <label className='flex items-center'>
+                            <button className='mr-2' onClick={liked}><ThumbUpIcon className={`${like && 'text-blue-500'}`} /></button>
+                            0
+                        </label>
+                        <label className='flex items-center'>
+                            <button className='mr-2' onClick={loved}><FavoriteIcon className={`${love && 'text-red-500'}`} /></button>
+                            1
+                        </label>
                         </div>
                     </div>
                     <div>

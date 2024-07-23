@@ -5,7 +5,8 @@ import sitting from './skills.png';
 import order from './package.png';
 import address from './address.png'
 import delivery from './fast-delivery.png'
-
+import heart from './heart.png'
+import like from './like.png'
 export{
     google,
     facebook,
@@ -13,5 +14,7 @@ export{
     sitting,
     order,
     address,
-    delivery
+    delivery,
+    heart,
+    like
 }
