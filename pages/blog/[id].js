@@ -47,8 +47,8 @@ export default function blog({ post }) {
                     <p className='text-xl'>{post.description}</p>
                     <div className='my-3 flex items-center justify-between'>
                         <p className='text-sm'>by MED NAJJAR</p>
-                        <div className='flex justify-around items-center w-1/6'>
-                        <label className='flex items-center'>
+                        <div className='flex justify-center items-center w-3/6 md:w-1/6'>
+                        <label className='flex  items-center mx-4'>
                             <button className='mr-2' onClick={liked}><ThumbUpIcon className={`${like && 'text-blue-500'}`} /></button>
                             0
                         </label>
@@ -61,7 +61,7 @@ export default function blog({ post }) {
                     <div>
                         <div>
                             <label>
-                                <textarea maxLength={1000} autoFocus className='border p-2 rounded-md resize-none' placeholder='Comment...' id="w3review" name="w3review" rows="4" cols="50"></textarea>
+                                <textarea maxLength={1000} autoFocus className='border p-2 rounded-md resize-none w-80 lg:w-auto' placeholder='Comment...' id="w3review" name="w3review" rows="4" cols="50"></textarea>
                             </label>
                         </div>
                     </div>

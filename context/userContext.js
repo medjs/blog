@@ -1,8 +1,8 @@
 import React from 'react';
 import { ref, get } from 'firebase/database';
-import { database } from '../firestore';
 import { useQuery } from 'react-query';
 import { useSession } from 'next-auth/react';
+import { database } from '../pages/api/firestore/firestore';
 
 
 // Create a function to fetch orders from Firebase

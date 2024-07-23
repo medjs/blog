@@ -2,9 +2,9 @@
 import React, { useState } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { auth } from '../../firestore'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import { auth } from '../api/firestore/firestore'
 
 const LoginRegisterForm = () => {
   const router = useRouter()

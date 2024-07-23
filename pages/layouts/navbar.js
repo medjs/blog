@@ -133,7 +133,7 @@ const navbar = () => {
                     href='/login'
                   >
                     <div>
-                      <p className='font-semibold'>Join us</p>
+                      <p className='font-semibold'>sign in</p>
                     </div>
                   </Link>
                 </div>
