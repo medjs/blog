@@ -3,10 +3,28 @@ import { usePathname } from 'next/navigation'
 import React, { useState, useEffect, useRef } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import Image from 'next/image'
-import styles from '../../styles/Home.module.css' // Import your CSS module
+import { cross, menu } from '../../public/icons'
+
+
+
 const navbar = () => {
+  const pages = [
+    {
+      name: 'Home',
+      target: '/'
+    },
+    {
+      name: 'Blog',
+      target: '/blog'
+    },
+    {
+      name: 'Contact',
+      target: '/contact'
+    }
+  ]
   const pathname = usePathname()
   const [active, setactive] = useState(true)
+  const [toggle, setToggle] = useState(false)
 
   const { data: session } = useSession()
   console.log("user from navbar", session)
@@ -51,12 +69,12 @@ const navbar = () => {
       <div
         className={`flex items-center justify-between py-4 top-0 w-full z-10 border-b-2 sticky ${scrolling && 'opacity-70 bg-white'}`}
       >
-        <div className='container w-full  mx-auto px-4 flex flex-wrap justify-between items-center'>
-          <div className=' w-full flex  justify-between md:w-1/4 '>
+        <div className='container w-full  mx-auto px-4 flex justify-between items-center'>
+          <div className=' w-1/2 flex  justify-between md:w-1/4 '>
             <Link href='/' className='text-3xl font-bold'>
               VALEXES
             </Link>
-            <input type='text' placeholder='search...' name='search' className='border rounded-2xl px-2' />
+            {/* <input type='text' placeholder='search...' name='search' className='border rounded-2xl px-2 mx-4' /> */}
           </div>
 
           {session ? (
@@ -89,34 +107,34 @@ const navbar = () => {
                       Welcome {session?.user.email.split('@')[0]}
                     </b>
                   )}
-                  
-                  
+
+
                 </div>
               </div>
-                    <ul className='flex justify-around items-center w-1/2 '>
-                      {pathname === '/dashboard' ? (
-                        <Link href='/'>
-                          <li className={`font-semibold  ${pathname === '/' && 'text-orange-500'}`}>Home</li>
-                        </Link>
-                      ) : (
-                        <Link href='/dashboard'>
-                          <li className={`font-semibold  ${pathname === '/dashboard' && 'text-orange-500'}`}>
-                            Dashboard
-                          </li>
-                        </Link>
-                      )}
-                      <li
-                        onClick={signOut}
-                        className='font-semibold border rounded-lg text-black px-3 py-1'
-                      >
-                        Logout
-                      </li>
-                    </ul>
+              <ul className='flex justify-around items-center w-1/2 '>
+                {pathname === '/dashboard' ? (
+                  <Link href='/'>
+                    <li className={`font-semibold  ${pathname === '/' && 'text-orange-500'}`}>Home</li>
+                  </Link>
+                ) : (
+                  <Link href='/dashboard'>
+                    <li className={`font-semibold  ${pathname === '/dashboard' && 'text-orange-500'}`}>
+                      Dashboard
+                    </li>
+                  </Link>
+                )}
+                <li
+                  onClick={signOut}
+                  className='font-semibold border rounded-lg text-black px-3 py-1'
+                >
+                  Logout
+                </li>
+              </ul>
             </div>
           ) : (
             pathname !== '/login' && (
-              <nav className='flex justify-between items-center w-full  text-xl md:w-1/3'>
-                <ul className='flex justify-around items-center w-2/3  '>
+              <nav className='flex justify-end items-center w-full  text-xl'>
+                <ul className='hidden sm:flex justify-around items-center w-1/2 '>
                   <Link href='/'>
                     <li className={`font-semibold hover:text-orange-500 ${pathname === '/' && 'text-orange-500'}`}>Home</li>
                   </Link>
@@ -126,16 +144,29 @@ const navbar = () => {
                   <Link href='/contact'>
                     <li className={`font-semibold hover:text-orange-500 ${pathname === '/contact' && 'text-orange-500'}`}>Contact</li>
                   </Link>
-                </ul>
-                <div className=' border-2 px-4 py-1  rounded-full bg-black text-white w-1/4 text-center hover:bg-orange-300'>
-
                   <Link
-                    href='/login'
+                    href='/login' className='font-semibold border px-3 text-lg pb-1 flex justify-center items-center rounded-2xl bg-black text-white text-center hover:bg-orange-300'
                   >
-                    <div>
-                      <p className='font-semibold'>sign in</p>
-                    </div>
+                    sign in
                   </Link>
+                </ul>
+
+                <div className='sm:hidden flex flex-1 justify-end items-center w-1/2'>
+                  <Image width={30} height={'auto'} src={!toggle ? menu : cross} alt='menu' onClick={() => setToggle(!toggle)} className='text-3xl font-bold cursor-pointer' />
+                  <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-white border absolute top-10 right-8 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
+                    <ul className='flex-col justify-end items-start gap-4'>
+                      {pages.length && pages.map((res, i) => (
+                        <Link key={i} href={res.target}>
+                          <li
+                            className={`px-2 py-1 list-none text-lg font-medium hover:text-gray-400 hover:underline`}
+                            onClick={() => setToggle(!toggle)}
+                          >
+                            {res.name}
+                          </li>
+                        </Link>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </nav>
             )

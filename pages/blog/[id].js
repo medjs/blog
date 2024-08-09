@@ -24,7 +24,7 @@ export default function blog({ post }) {
     return (
         <>
             <Head>
-                <title>ScriptoFile</title>
+                <title>Blog</title>
                 <meta name="description" content="Web development blog to learn javascript frameworks" key="desc" />
                 <meta property="og:title" content="Welcome to ScriptoFile Blog" />
                 <meta
@@ -39,23 +39,25 @@ export default function blog({ post }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="container mx-auto my-10">
-                <div className=" text-justify border border-gray-300 rounded-lg p-4 m-2 md:w-2/3 md:mx-auto  ">
-                    <div className='flex justify-between items-center  my-3'>
+                <div className=" border border-gray-300 rounded-lg p-4 m-2 md:w-2/3 md:mx-auto  ">
+                    <div className='flex justify-between flex-wrap items-center  my-3'>
                         <h1 className="text-3xl font-bold my-3">{post.title}</h1>
                         <p>Posted : {dt}</p>
                     </div>
-                    <p className='text-xl'>{post.description}</p>
+                    <div className='text-justify'>
+                        <p className='text-xl'>{post.description}</p>
+                    </div>
                     <div className='my-3 flex items-center justify-between'>
                         <p className='text-sm'>by MED NAJJAR</p>
-                        <div className='flex justify-center items-center w-3/6 md:w-1/6'>
-                        <label className='flex  items-center mx-4'>
-                            <button className='mr-2' onClick={liked}><ThumbUpIcon className={`${like && 'text-blue-500'}`} /></button>
-                            0
-                        </label>
-                        <label className='flex items-center'>
-                            <button className='mr-2' onClick={loved}><FavoriteIcon className={`${love && 'text-red-500'}`} /></button>
-                            1
-                        </label>
+                        <div className='flex justify-center items-center w-2/6 md:w-1/6'>
+                            <label className='flex  items-center mx-4 '>
+                                <button className='mr-2' onClick={liked}><ThumbUpIcon className={`${like && 'text-blue-500'}`} /></button>
+                                0
+                            </label>
+                            <label className='flex items-center'>
+                                <button className='mr-2' onClick={loved}><FavoriteIcon className={`${love && 'text-red-500'}`} /></button>
+                                1
+                            </label>
                         </div>
                     </div>
                     <div>
@@ -72,7 +74,7 @@ export default function blog({ post }) {
 }
 
 export async function getStaticPaths() {
-    const paths = Posts.map(post => ({ params: { id: post.id.toString() } }));
+    const paths = Posts.map(post => ({ params: { id: post.id} }));
     return { paths, fallback: false }
 }
 
