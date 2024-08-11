@@ -4,9 +4,10 @@ import Posts from './posts'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useState } from 'react';
+import { cross, menu } from '../../public/icons';
 
 
-export default function blog({ post }) {
+export default function blog({ post, cmnt }) {
     let date = new Date()
     let dt = date.getDate() + '-' + date.getDay() + '-' + date.getFullYear()
     const [like, setLike] = useState(false)
@@ -67,6 +68,15 @@ export default function blog({ post }) {
                             </label>
                         </div>
                     </div>
+                <div className='my-6'>
+                    <div key={cmnt.idPost}>
+                        <div className='flex justify-start items-center gap-3'>
+                            <Image src={cmnt.img} alt='image profile' width={20} height={20} />
+                            <p>{cmnt.name}</p>
+                        </div>
+                        <p className='mt-3'>{cmnt.comnt}</p>
+                    </div>
+                </div>
                 </div>
             </main>
         </>
@@ -74,17 +84,39 @@ export default function blog({ post }) {
 }
 
 export async function getStaticPaths() {
-    const paths = Posts.map(post => ({ params: { id: post.id} }));
+    const paths = Posts.map(post => ({ params: { id: post.id } }));
     return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }) {
     const id = params.id;
+    const comment = [
+        {
+            idPost: 'the_first_post',
+            img: cross,
+            comnt: 'this is great',
+            name: 'simo'
+        },
+        {
+            idPost: 'the_second_post',
+            img: menu,
+            comnt: 'this is great two',
+            name: 'demo'
+        },
+        {
+            idPost: 'the_third_post',
+            img: cross,
+            comnt: 'this is great three',
+            name: 'kemo'
+        },
+    ]
     const post = Posts.find(post => post.id === id)
+    const cmnt = comment.find(coment => coment.idPost === id)
 
     return {
         props: {
-            post
+            post,
+            cmnt
         }
     }
 }
